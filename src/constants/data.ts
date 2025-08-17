@@ -105,8 +105,8 @@ export const myProjects = [
     desc: "My Portfolio Website, a showcase of my skills, projects, and experience as a software developer.",
     subdesc:
       "Build with cutting-edge web technologies, this portfolio showcases dynamic 3D components, fluid animations, and adaptive design for a captivating UX.",
-    href: "https://github.com/Ajay8302/react-portfolio-updated",
-    source: "https://ajay-dev-portfolio1.vercel.app/",
+    href: "https://ajay-dev-portfolio1.vercel.app/",
+    source: "https://github.com/Ajay8302/react-portfolio-updated",
     logo: "projects/Portfolio_Main.png",
     logoStyle: {
       backgroundColor: "#4FC3F7",
