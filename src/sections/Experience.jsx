@@ -114,7 +114,7 @@ ExperienceCard.propTypes = {
     position: PropTypes.string.isRequired,
     duration: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
-    duties: PropTypes.arrayOf(PropTypes.string).isRequired,
+
     technologies: PropTypes.arrayOf(PropTypes.string),
     projects: PropTypes.arrayOf(
       PropTypes.shape({

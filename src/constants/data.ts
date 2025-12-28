@@ -20,6 +20,11 @@ export const navLinks = [
     href: "#projects",
   },
   {
+    id: 4,
+    name: "Certifications",
+    href: "#certifications",
+  },
+  {
     id: 5,
     name: "Contact",
     href: "#contact",
@@ -168,7 +173,7 @@ export const myProjects = [
       },
     ],
   },
-    {
+  {
     "title": "shopByte - Full-Stack E-Commerce Application",
     "desc": "A full-stack e-commerce web application built using .NET Core, Angular, and Node.js, integrating JWT authentication and Swagger for API documentation.",
     "subdesc": "Developed with a robust tech stack, including HTML5, CSS3, Bootstrap, and advanced features such as secure authentication and a responsive design for a seamless shopping experience.",
@@ -197,7 +202,7 @@ export const myProjects = [
         "name": "Bootstrap",
         "path": "icons/bootstrap.svg"
       },
-       {
+      {
         "id": 4,
         "name": ".NET Core",
         "path": "icons/dotNet.svg"
@@ -350,7 +355,7 @@ export const workExperiences = [
     company: "Mphasis Limited",
     position: "Associate Software Engineer",
     duration: "Ferburary 2022 - June 2025 - Bengaluru, India",
-    icon: "mphasis_logo.png",  
+    icon: "mphasis_logo.png",
     technologies: [
       "JavaScript",
       "C#",
@@ -519,7 +524,7 @@ export const skills = [
   "HTML5",
   "CSS3",
   "Node.js",
-  "ASP .Net", 
+  "ASP .Net",
   "Express.js",
   "Git",
   "MongoDB",
@@ -550,4 +555,39 @@ export const skills = [
   "Figma",
   "Docker",
   "Kubernetes",
+];
+
+export const myCertifications = [
+  {
+    id: 1,
+    title: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services",
+    date: "2024",
+    link: "https://drive.google.com/file/d/1e_0CsBAoYopf4SS4yX2pxlDbooEEFPZr/view?usp=drive_link",
+    image: "/certificates/awsCloudPractitioner.png",
+  },
+  {
+    id: 2,
+    title: "AZURE AZ 900 Certificate",
+    issuer: "Microsoft",
+    date: "2023",
+    link: "https://drive.google.com/file/d/1vd74DKrc4jr95WDph0-UGwwfSh3juZ_n/view?usp=drive_link",
+    image: "/certificates/Azurre_AZ900.png",
+  },
+  {
+    id: 3,
+    title: "Introduction to Generative AI",
+    issuer: "SimpliLearn & Google",
+    date: "2025",
+    link: "https://drive.google.com/file/d/1ku8zApFxZFU2Asna8-hKI0OWa0a1XRtf/view?usp=drive_link",
+    image: "/certificates/Intro_to_Gen_AI.png",
+  },
+  {
+    id: 4,
+    title: "AZ-204 Exam Preparation: Developing Solutions",
+    issuer: "Cloud Academy",
+    date: "2023",
+    link: "https://drive.google.com/file/d/1ylwbsX8nurVZ_nEsN9rvxpUMuPwto8Vf/view?usp=drive_link",
+    image: "/certificates/AZ-204_Exam_Preparation.png",
+  },
 ];

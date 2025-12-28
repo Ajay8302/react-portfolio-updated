@@ -4,6 +4,7 @@ import Hero from "./sections/Hero";
 import Experience from "./sections/Experience";
 import Skills from "./sections/Skills";
 import Projects from "./sections/Projects";
+import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
 import StarCanvas from "./components/StarField";
 import Footer from "./components/Footer";
@@ -17,6 +18,7 @@ export default function App() {
       <Skills />
       <Experience />
       <Projects />
+      <Certifications />
       <Contact />
       <Footer />
       <CursorGlow />
