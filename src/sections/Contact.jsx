@@ -56,8 +56,16 @@ const Contact = () => {
       });
       return;
     }
-    lastSubmitRef.current = now;
 
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      setStatus({
+        type: "error",
+        text: "Email service isn't configured in this environment (missing VITE_EMAILJS_* variables).",
+      });
+      return;
+    }
+
+    lastSubmitRef.current = now;
     setLoading(true);
     emailjs
       .send(
@@ -82,6 +90,7 @@ const Contact = () => {
         },
         () => {
           setLoading(false);
+          lastSubmitRef.current = 0;
           setStatus({
             type: "error",
             text: "Something went wrong. Please try again later.",
