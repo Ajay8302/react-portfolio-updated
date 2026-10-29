@@ -77,7 +77,9 @@ const Navbar = () => {
             <button
               onClick={toggleMenu}
               className="text-white hover:text-[#ff9720] focus:outline-none sm:hidden flex"
-              aria-label="Open Menu"
+              aria-label={isOpen ? "Close Menu" : "Open Menu"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
               {isOpen ? (
                 <FaTimes color="white" size={25} />
@@ -93,6 +95,7 @@ const Navbar = () => {
         </div>
 
         <div
+          id="mobile-menu"
           className={`absolute left-0 right-0 bg-[#1a191e] transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block ${
             isOpen ? "max-h-screen" : "max-h-0"
           }`}

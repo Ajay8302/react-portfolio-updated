@@ -34,7 +34,7 @@ export const navLinks = [
 export const myProjects = [
   {
     title: "firstCommerce – Scalable Web Application for Online Shopping (Inspired by Amazon)",
-    desc: "firstCommerce is a all-sreens compatible e-commerce platform inspired by Amazon, offering product browsing, cart management, and secure checkout with real-time updates.",
+    desc: "firstCommerce is an all-screens compatible e-commerce platform inspired by Amazon, offering product browsing, cart management, and secure checkout with real-time updates.",
     subdesc:
       "This is a modern e-commerce app built with React and Firebase, firestore, Redux and React Router.",
     href: "https://firstcommerce-dev.netlify.app/",
@@ -109,7 +109,7 @@ export const myProjects = [
     title: "Ajay Kumar - Portfolio Website",
     desc: "My Portfolio Website, a showcase of my skills, projects, and experience as a software developer.",
     subdesc:
-      "Build with cutting-edge web technologies, this portfolio showcases dynamic 3D components, fluid animations, and adaptive design for a captivating UX.",
+      "Built with cutting-edge web technologies, this portfolio showcases dynamic 3D components, fluid animations, and adaptive design for a captivating UX.",
     href: "https://ajay-dev-portfolio1.vercel.app/",
     source: "https://github.com/Ajay8302/react-portfolio-updated",
     logo: "projects/Portfolio_Main.png",
@@ -177,8 +177,8 @@ export const myProjects = [
     "title": "shopByte - Full-Stack E-Commerce Application",
     "desc": "A full-stack e-commerce web application built using .NET Core, Angular, and Node.js, integrating JWT authentication and Swagger for API documentation.",
     "subdesc": "Developed with a robust tech stack, including HTML5, CSS3, Bootstrap, and advanced features such as secure authentication and a responsive design for a seamless shopping experience.",
-    "href": "#",
-    "source": "https://github.com/#",
+    "href": null,
+    "source": null,
     "logo": "projects/shopbyte1.png",
     "logoStyle": {
       "backgroundColor": "#A0F0BC",
@@ -313,8 +313,8 @@ export const myProjects = [
 export const workExperiences = [
   {
     id: 1,
-    company: "Aplty Technologies",
-    position: "Software Developement Engieer 1 (R&D)",
+    company: "Aptly Technologies",
+    position: "Software Development Engineer 1 (R&D)",
     duration: "June 2025 - current - Bengaluru, India",
     icon: "aptly_logo.png",
     technologies: [
@@ -334,12 +334,12 @@ export const workExperiences = [
       "Socket.io",
       "Drizzle-ORM",
       "Turborepo",
-      "Zudstand",
+      "Zustand",
       "Node Js",
     ],
     projects: [
       {
-        name: "Aptly Star and AgentLauchpad Product Developement",
+        name: "Aptly Star and AgentLaunchpad Product Development",
         // description: "Aptly Star is a comprehensive platform designed to streamline the development and management of AI agents, providing tools for building, deploying, and monitoring agents across various domains.",
         link: "",
       },
@@ -354,7 +354,7 @@ export const workExperiences = [
     id: 2,
     company: "Mphasis Limited",
     position: "Associate Software Engineer",
-    duration: "Ferburary 2022 - June 2025 - Bengaluru, India",
+    duration: "February 2022 - June 2025 - Bengaluru, India",
     icon: "mphasis_logo.png",
     technologies: [
       "JavaScript",
@@ -440,7 +440,7 @@ export const workExperiences = [
       ".Net Core MVC",
       "WCF",
       "CSS3",
-      "JavScript",
+      "JavaScript",
       "Agile",
       "Google Firebase",
       "Google FireStore",
@@ -534,8 +534,8 @@ export const skills = [
   "MySQL",
   "Scrum",
   "Agile",
-  "Gen. A.I.",
-  "L.L.M's",
+  "Generative AI",
+  "LLMs",
   "GitHub",
   "Confluence",
   "MicroServices",

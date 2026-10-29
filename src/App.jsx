@@ -14,12 +14,14 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Certifications />
-      <Contact />
+      <main>
+        <Hero />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Certifications />
+        <Contact />
+      </main>
       <Footer />
       <CursorGlow />
       <StarCanvas />

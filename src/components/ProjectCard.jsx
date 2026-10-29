@@ -44,7 +44,7 @@ const ProjectCard = ({ project }) => {
 
         <div className="flex justify-between items-center w-full">
           {/* GitHub Link */}
-          {project.href && (
+          {project.source && (
             <motion.a
               className="flex items-center gap-2 cursor-pointer text-white"
               href={project.source}
@@ -59,19 +59,21 @@ const ProjectCard = ({ project }) => {
           )}
 
           {/* Demo Link */}
-          <div className="flex items-center gap-6">
-            <motion.a
-              className="flex items-center gap-2 cursor-pointer text-white"
-              href={project.href}
-              target="_blank"
-              rel="noreferrer"
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <p className="text-xs md:text-base">Demo</p>
-              <img src="arrow-up.png" alt="arrow" className="w-3 h-3" />
-            </motion.a>
-          </div>
+          {project.href && (
+            <div className="flex items-center gap-6">
+              <motion.a
+                className="flex items-center gap-2 cursor-pointer text-white"
+                href={project.href}
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <p className="text-xs md:text-base">Demo</p>
+                <img src="arrow-up.png" alt="arrow" className="w-3 h-3" />
+              </motion.a>
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
@@ -84,11 +86,11 @@ ProjectCard.propTypes = {
   project: PropTypes.shape({
     logo: PropTypes.string.isRequired,
     logoStyle: PropTypes.object.isRequired,
-    source: PropTypes.string.isRequired,
+    source: PropTypes.string,
     title: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
     subdesc: PropTypes.string.isRequired,
-    href: PropTypes.string.isRequired,
+    href: PropTypes.string,
     tags: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,

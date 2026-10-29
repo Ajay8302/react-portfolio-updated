@@ -29,12 +29,12 @@ const Hero = () => {
         id="home"
       >
         <div className="max-w-7xl mx-auto flex flex-col c-space gap-7 items-center">
-          <h2 className="md:text-5xl sm:text-4xl text-2xl font-medium text-white text-center">
+          <h1 className="md:text-5xl sm:text-4xl text-2xl font-medium text-white text-center">
             Hi, I am{" "}
             <LinearGradient gradient={["to left", "#ff9720 ,#fc0865"]}>
               Ajay Kumar
             </LinearGradient>
-          </h2>
+          </h1>
           <h2
             className=" text-center text-white xl:text-6xl md:text-5xl sm:text-4xl text-3xl font-black !leading-normal relative w-[max-content]
 before:absolute before:inset-0 before:animate-typewriter before:bg-[#1a191e]
@@ -44,8 +44,8 @@ after:absolute after:inset-0 after:w-[0.125em] after:animate-caret after:bg-whit
           </h2>
 
           <p className="max-w-4xl text-center justify-center text-white xl:text-xl md:text-lg sm:text-sm text-md">
-            I&apos;m a passionate software developer with expertise in web, product and Generative 
-            A.I Integration development using JavaScript, TypeScript, C#, and python, Langchain, LLM's. 
+            I&apos;m a passionate software developer with expertise in web, product and Generative
+            AI integration development using JavaScript, TypeScript, C#, and Python, LangChain, and LLMs.
             I build interactive experiences and web applications, leveraging both front-end
              and back-end technologies. With a strong focus on clean code, collaboration, and continuous
             learning, I strive to create innovative solutions that enhance user experiences.
@@ -75,7 +75,7 @@ after:absolute after:inset-0 after:w-[0.125em] after:animate-caret after:bg-whit
                   : {}
               }
             >
-              <SocialIcon className="heroIcon" url={link.url} />
+              <SocialIcon className="heroIcon" url={link.url} target="_blank" />
             </motion.div>
           ))}
         </motion.div>
