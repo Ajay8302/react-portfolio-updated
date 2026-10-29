@@ -1,4 +1,5 @@
 import "./App.css";
+import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
 import Experience from "./sections/Experience";
@@ -25,6 +26,7 @@ export default function App() {
       <Footer />
       <CursorGlow />
       <StarCanvas />
+      <Analytics />
     </>
   );
 }
