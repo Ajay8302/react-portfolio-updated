@@ -45,7 +45,6 @@ const Footer = () => {
               //"https://www.instagram.com/ajay.chandel01/?hl=en",
               "https://x.com/ajay_Dev1",
               "https://www.facebook.com/profile.php?id=100010283986894",
-              ""
             ].map((url, index) => (
               <motion.div
                 key={index}
@@ -54,6 +53,7 @@ const Footer = () => {
               >
                 <SocialIcon
                   url={url}
+                  target="_blank"
                   bgColor="transparent"
                   fgColor="white"
                   style={{ height: 35, width: 35 }}

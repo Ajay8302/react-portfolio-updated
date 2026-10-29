@@ -7,7 +7,7 @@ const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const TO_NAME = import.meta.env.VITE_EMAILJS_TO_NAME;
-const TO_EMAIL = import.meta.env.VITE_EMAILJS_TO_EMAIL;
+const MIN_SUBMIT_INTERVAL_MS = 10000;
 
 /**
  * The Contact section of the website allows users to
@@ -18,8 +18,10 @@ const TO_EMAIL = import.meta.env.VITE_EMAILJS_TO_EMAIL;
  */
 const Contact = () => {
   const formRef = useRef();
+  const lastSubmitRef = useRef(0);
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", message: "", company: "" });
+  const [status, setStatus] = useState(null); // { type: "success" | "error", text: string }
 
   /**
    * Handles the change of the form fields, updates the
@@ -39,8 +41,24 @@ const Contact = () => {
    */
   const handleSubmit = (e) => {
     e.preventDefault();
+    setStatus(null);
+
+    // Honeypot: real visitors never see or fill this field, bots often do.
+    if (form.company) {
+      return;
+    }
+
+    const now = Date.now();
+    if (now - lastSubmitRef.current < MIN_SUBMIT_INTERVAL_MS) {
+      setStatus({
+        type: "error",
+        text: "Please wait a few seconds before sending another message.",
+      });
+      return;
+    }
+    lastSubmitRef.current = now;
+
     setLoading(true);
-    console.log("PUBLIC_KEY:", PUBLIC_KEY);
     emailjs
       .send(
         SERVICE_ID,
@@ -49,7 +67,6 @@ const Contact = () => {
           from_name: form.name,
           to_name: TO_NAME,
           from_email: form.email,
-          to_email: TO_EMAIL,
           message: form.message,
         },
         PUBLIC_KEY
@@ -57,17 +74,18 @@ const Contact = () => {
       .then(
         () => {
           setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible");
-          setForm({
-            name: "",
-            email: "",
-            message: "",
+          setStatus({
+            type: "success",
+            text: "Thank you. I will get back to you as soon as possible.",
           });
+          setForm({ name: "", email: "", message: "", company: "" });
         },
-        (error) => {
+        () => {
           setLoading(false);
-          console.log(error);
-          alert("Something went wrong!");
+          setStatus({
+            type: "error",
+            text: "Something went wrong. Please try again later.",
+          });
         }
       );
   };
@@ -101,6 +119,24 @@ const Contact = () => {
             onSubmit={handleSubmit}
             className="flex flex-col gap-6 w-full"
           >
+            {/* Honeypot field: hidden from sighted users and screen readers, but visible to most bots. */}
+            <label
+              htmlFor="company"
+              aria-hidden="true"
+              className="absolute w-px h-px overflow-hidden opacity-0 -left-[9999px]"
+            >
+              Company
+              <input
+                id="company"
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                value={form.company}
+                onChange={handleChange}
+              />
+            </label>
+
             <label className="flex flex-col">
               <span className="text-white font-medium mb-2">Name</span>
               <input
@@ -142,12 +178,25 @@ const Contact = () => {
 
             <motion.button
               type="submit"
-              className="bg-[#ff9720] text-black w-full sm:w-fit py-3 px-6 rounded-lg font-bold outline-none self-center sm:self-start"
+              disabled={loading}
+              className="bg-[#ff9720] text-black w-full sm:w-fit py-3 px-6 rounded-lg font-bold outline-none self-center sm:self-start disabled:opacity-60"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
               {loading ? "Sending..." : "Send"}
             </motion.button>
+
+            {status && (
+              <p
+                role="status"
+                aria-live="polite"
+                className={`text-sm ${
+                  status.type === "success" ? "text-green-400" : "text-red-400"
+                }`}
+              >
+                {status.text}
+              </p>
+            )}
           </form>
         </div>
       </motion.div>
