@@ -29,21 +29,21 @@ const Hero = () => {
         id="home"
       >
         <div className="max-w-7xl mx-auto flex flex-col c-space gap-7 items-center">
-          <h1 className="md:text-5xl sm:text-4xl text-2xl font-medium text-white text-center">
+          <h1 className="md:text-5xl sm:text-4xl text-2xl font-medium theme-primary text-center">
             Hi, I am{" "}
             <LinearGradient gradient={["to left", "#ff9720 ,#fc0865"]}>
               Ajay Kumar
             </LinearGradient>
           </h1>
           <h2
-            className=" text-center text-white xl:text-6xl md:text-5xl sm:text-4xl text-3xl font-black !leading-normal relative w-[max-content]
-before:absolute before:inset-0 before:animate-typewriter before:bg-[#1a191e]
-after:absolute after:inset-0 after:w-[0.125em] after:animate-caret after:bg-white"
+            className="typewriter-title text-center theme-primary xl:text-6xl md:text-5xl sm:text-4xl text-3xl font-black !leading-normal relative w-[max-content]
+before:absolute before:inset-0 before:animate-typewriter
+after:absolute after:inset-0 after:w-[0.125em] after:animate-caret after:bg-[#ff9720]"
           >
             Software Developer
           </h2>
 
-          <p className="max-w-4xl text-center justify-center text-white xl:text-xl md:text-lg sm:text-sm text-md">
+          <p className="max-w-4xl text-center justify-center theme-secondary xl:text-xl md:text-lg sm:text-sm text-md">
             I&apos;m a passionate software developer with expertise in web, product and Generative
             AI integration development using JavaScript, TypeScript, C#, and Python, LangChain, and LLMs.
             I build interactive experiences and web applications, leveraging both front-end

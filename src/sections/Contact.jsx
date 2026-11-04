@@ -39,7 +39,7 @@ const Contact = () => {
    * outcome of the email sending process.
    * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
    */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(null);
 
@@ -67,8 +67,8 @@ const Contact = () => {
 
     lastSubmitRef.current = now;
     setLoading(true);
-    emailjs
-      .send(
+    try {
+      await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
         {
@@ -78,25 +78,25 @@ const Contact = () => {
           message: form.message,
         },
         PUBLIC_KEY
-      )
-      .then(
-        () => {
-          setLoading(false);
-          setStatus({
-            type: "success",
-            text: "Thank you. I will get back to you as soon as possible.",
-          });
-          setForm({ name: "", email: "", message: "", company: "" });
-        },
-        () => {
-          setLoading(false);
-          lastSubmitRef.current = 0;
-          setStatus({
-            type: "error",
-            text: "Something went wrong. Please try again later.",
-          });
-        }
       );
+      setStatus({
+        type: "success",
+        text: "Thank you. I will get back to you as soon as possible.",
+      });
+      setForm({ name: "", email: "", message: "", company: "" });
+    } catch (error) {
+      lastSubmitRef.current = 0;
+      const providerMessage = `${error?.text || error?.message || ""}`;
+      const needsReconnect = /invalid grant|reconnect your gmail/i.test(providerMessage);
+      setStatus({
+        type: "error",
+        text: needsReconnect
+          ? "Email delivery is temporarily unavailable. The site owner needs to reconnect the Gmail account in EmailJS."
+          : "Something went wrong while sending your message. Please try again later.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -122,7 +122,7 @@ const Contact = () => {
           </motion.h2>
         </div>
 
-        <div className="flex w-full max-w-lg bg-[#32303a] sm:p-8 p-6 rounded-xl text-white">
+        <div className="glass-panel flex w-full max-w-lg sm:p-8 p-6 rounded-2xl">
           <form
             ref={formRef}
             onSubmit={handleSubmit}
@@ -147,40 +147,40 @@ const Contact = () => {
             </label>
 
             <label className="flex flex-col">
-              <span className="text-white font-medium mb-2">Name</span>
+              <span className="theme-primary font-medium mb-2">Name</span>
               <input
                 type="text"
                 name="name"
                 value={form.name}
                 onChange={handleChange}
                 required
-                className="py-3 px-4 bg-[#46454d] rounded-lg"
+                className="contact-input py-3 px-4 rounded-lg"
                 placeholder="ex. John Doe"
               />
             </label>
 
             <label className="flex flex-col">
-              <span className="text-white font-medium mb-2">Email address</span>
+              <span className="theme-primary font-medium mb-2">Email address</span>
               <input
                 type="email"
                 name="email"
                 value={form.email}
                 onChange={handleChange}
                 required
-                className="py-3 px-4 bg-[#46454d] rounded-lg"
+                className="contact-input py-3 px-4 rounded-lg"
                 placeholder="ex. johndoe@gmail.com"
               />
             </label>
 
             <label className="flex flex-col">
-              <span className="text-white font-medium mb-2">Message</span>
+              <span className="theme-primary font-medium mb-2">Message</span>
               <textarea
                 name="message"
                 value={form.message}
                 onChange={handleChange}
                 required
                 rows={5}
-                className="py-3 px-4 bg-[#46454d] rounded-lg resize-none"
+                className="contact-input py-3 px-4 rounded-lg resize-none"
                 placeholder="Share your thoughts..."
               />
             </label>

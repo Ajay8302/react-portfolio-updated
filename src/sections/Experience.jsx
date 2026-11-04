@@ -11,11 +11,11 @@ import PropTypes from "prop-types";
 const ExperienceCard = ({ experience }) => {
   return (
     <VerticalTimelineElement
-      contentStyle={{ background: "#32303a", color: "fff" }}
-      contentArrowStyle={{ borderRight: "7px solid #32303a" }}
+      contentStyle={{ background: "var(--glass-fill)", color: "var(--text-primary)" }}
+      contentArrowStyle={{ borderRight: "7px solid var(--glass-fill)" }}
       date={experience.duration}
-      dateClassName="text-white"
-      iconStyle={{ background: "#32303a", color: "#fff" }}
+      dateClassName="theme-secondary"
+      iconStyle={{ background: "var(--glass-fill)", color: "var(--text-primary)", border: "1px solid var(--glass-border)" }}
       icon={
         <div className="flex justify-center items-center w-full h-full">
           <img
@@ -28,10 +28,10 @@ const ExperienceCard = ({ experience }) => {
     >
       {/* Experience */}
       <div>
-        <h3 className="text-white text-base font-bold">
+        <h3 className="theme-primary text-base font-bold">
           {experience.position}
         </h3>
-        <p className="text-gray-300 text-base font-mono" style={{ margin: 0 }}>
+        <p className="theme-secondary text-base font-mono" style={{ margin: 0 }}>
           {experience.company}
         </p>
       </div>
@@ -51,12 +51,12 @@ const ExperienceCard = ({ experience }) => {
       {/* Projects */}
       {experience.projects && experience.projects.length > 0 && (
         <div className="mt-5">
-          <h4 className="text-sm text-white font-semibold mb-2">Projects:</h4>
+          <h4 className="text-sm theme-primary font-semibold mb-2">Projects:</h4>
           <ul className="list-disc ml-5 space-y-1">
             {experience.projects.map((project, i) => (
               <li
                 key={`project-${i}`}
-                className="text-gray-400 text-xs md:text-sm font-medium"
+                className="theme-secondary text-xs md:text-sm font-medium"
               >
                 {project.name}
               </li>

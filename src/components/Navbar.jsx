@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { FaAlignRight } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
+import { FaAlignRight, FaMoon, FaSun, FaTimes } from "react-icons/fa";
 import { navLinks } from "../constants/data";
 import { motion } from "framer-motion";
 
-const NavItems = () => {
+const NavItems = ({ activeLink }) => {
   return (
     <>
       <ul className="flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20">
@@ -17,9 +16,8 @@ const NavItems = () => {
           >
             <motion.a
               href={href}
-              className="text-lg md:text-base text-white"
-              whileHover={{ color: "#ff9720" }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              className={`nav-link text-lg md:text-base ${activeLink === href.slice(1) ? "nav-link-active" : ""}`}
+              aria-current={activeLink === href.slice(1) ? "location" : undefined}
             >
               {name}
             </motion.a>
@@ -30,9 +28,10 @@ const NavItems = () => {
   );
 };
 
-const Navbar = () => {
+const Navbar = ({ theme, onToggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeLink, setActiveLink] = useState(() => window.location.hash.slice(1) || "home");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,10 +45,22 @@ const Navbar = () => {
       if (isOpen) {
         setIsOpen(false);
       }
+
+      const marker = window.scrollY + window.innerHeight * 0.35;
+      const visibleSection = navLinks.reduce((active, { href }) => {
+        const section = document.getElementById(href.slice(1));
+        return section && section.offsetTop <= marker ? href.slice(1) : active;
+      }, "home");
+      setActiveLink(visibleSection);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, [isOpen]);
 
   const toggleMenu = () => {
@@ -58,11 +69,7 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled || isOpen
-            ? "bg-[#1a191e] border-b-2 border-[#ff9720] border-opacity-100 shadow-md"
-            : "bg-transparent border-b-2 border-[#ff9720] border-opacity-0"
-        }`}
+        className={`site-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || isOpen ? "site-nav-scrolled" : ""}`}
       >
         <div className="mx-auto px-6 sm:px-8 md:px-10">
           <div className="flex justify-between items-center py-5">
@@ -74,34 +81,41 @@ const Navbar = () => {
               />
             </a>
 
-            <button
-              onClick={toggleMenu}
-              className="text-white hover:text-[#ff9720] focus:outline-none sm:hidden flex"
-              aria-label={isOpen ? "Close Menu" : "Open Menu"}
-              aria-expanded={isOpen}
-              aria-controls="mobile-menu"
-            >
-              {isOpen ? (
-                <FaTimes color="white" size={25} />
-              ) : (
-                <FaAlignRight color="white" size={25} />
-              )}
-            </button>
-
-            <nav className="sm:flex hidden">
-              <NavItems />
-            </nav>
+            <div className="flex items-center gap-4">
+              <nav className="sm:flex hidden">
+                <NavItems activeLink={activeLink} />
+              </nav>
+              <button
+                type="button"
+                onClick={onToggleTheme}
+                className="theme-toggle"
+                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              >
+                {theme === "dark" ? <FaSun aria-hidden="true" /> : <FaMoon aria-hidden="true" />}
+                <span className="sr-only">{theme === "dark" ? "Light mode" : "Dark mode"}</span>
+              </button>
+              <button
+                onClick={toggleMenu}
+                className="nav-menu-toggle sm:hidden flex"
+                aria-label={isOpen ? "Close Menu" : "Open Menu"}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu"
+              >
+                {isOpen ? <FaTimes size={25} /> : <FaAlignRight size={25} />}
+              </button>
+            </div>
           </div>
         </div>
 
         <div
           id="mobile-menu"
-          className={`absolute left-0 right-0 bg-[#1a191e] transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block ${
+          className={`site-mobile-menu absolute left-0 right-0 transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block ${
             isOpen ? "max-h-screen" : "max-h-0"
           }`}
         >
           <nav className="p-5">
-            <NavItems />
+            <NavItems activeLink={activeLink} />
           </nav>
         </div>
       </header>
