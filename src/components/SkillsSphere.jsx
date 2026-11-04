@@ -18,7 +18,7 @@ const AnimatedText = animated(Text);
  *
  * @returns {JSX.Element} A word in a sphere.
  */
-const Word = ({ children, position }) => {
+const Word = ({ children, position, theme }) => {
   const [hovered, setHovered] = useState(false);
   const textRef = useRef();
 
@@ -29,7 +29,7 @@ const Word = ({ children, position }) => {
   });
 
   const { color, scale } = useSpring({
-    color: hovered ? "#fc0865" : "white",
+    color: hovered ? "#fc0865" : theme === "light" ? "#45414d" : "#f7f6fa",
     scale: hovered ? 1.1 : 1,
     config: { tension: 200, friction: 20 },
   });
@@ -53,6 +53,7 @@ const Word = ({ children, position }) => {
 Word.propTypes = {
   children: PropTypes.node.isRequired,
   position: PropTypes.object.isRequired,
+  theme: PropTypes.oneOf(["dark", "light"]).isRequired,
 };
 
 /**
@@ -60,7 +61,7 @@ Word.propTypes = {
  *
  * @returns {JSX.Element} A sphere with words.
  */
-const WordSphere = () => {
+const WordSphere = ({ theme }) => {
   const radius = 5;
   const goldenAngle = Math.PI * (3 - Math.sqrt(5)); //≈ 2.399
 
@@ -81,12 +82,16 @@ const WordSphere = () => {
   return (
     <group>
       {wordPositions.map(({ skill, position }, index) => (
-        <Word key={index} position={position}>
+        <Word key={index} position={position} theme={theme}>
           {skill}
         </Word>
       ))}
     </group>
   );
+};
+
+WordSphere.propTypes = {
+  theme: PropTypes.oneOf(["dark", "light"]).isRequired,
 };
 
 /**
@@ -97,7 +102,7 @@ const WordSphere = () => {
  *
  * @returns {JSX.Element} A Canvas element with a sphere of words.
  */
-const SkillsSphere = () => {
+const SkillsSphere = ({ theme }) => {
   const [size, setSize] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -122,7 +127,7 @@ const SkillsSphere = () => {
     >
       <Suspense fallback={<Loader />}>
         <ambientLight intensity={0.5} />
-        <WordSphere />
+        <WordSphere theme={theme} />
         <OrbitControls
           enablePan={false}
           enableZoom={false}
@@ -132,6 +137,10 @@ const SkillsSphere = () => {
       </Suspense>
     </Canvas>
   );
+};
+
+SkillsSphere.propTypes = {
+  theme: PropTypes.oneOf(["dark", "light"]).isRequired,
 };
 
 export default SkillsSphere;

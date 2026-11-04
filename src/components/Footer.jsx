@@ -4,7 +4,7 @@ import { SocialIcon } from "react-social-icons";
 const Footer = () => {
   return (
     <motion.footer
-      className="w-full bg-[#1a191e] text-white py-8"
+      className="portfolio-footer w-full py-8"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -13,7 +13,7 @@ const Footer = () => {
       <div className="mx-auto px-6">
         {/* Separator Line */}
         <motion.div
-          className="border-t border-gray-600 opacity-50 mb-6"
+          className="border-t border-[var(--glass-border)] opacity-70 mb-6"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
@@ -55,7 +55,7 @@ const Footer = () => {
                   url={url}
                   target="_blank"
                   bgColor="transparent"
-                  fgColor="white"
+                  fgColor="var(--text-primary)"
                   style={{ height: 35, width: 35 }}
                 />
               </motion.div>
@@ -64,7 +64,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="text-center text-xs text-neutral-400 mt-6">
+        <div className="text-center text-xs theme-secondary mt-6">
           © {new Date().getFullYear()} Ajay Kumar. All rights reserved.
         </div>
       </div>

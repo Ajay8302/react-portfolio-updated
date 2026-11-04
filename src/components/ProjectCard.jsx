@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 
 const ProjectCard = ({ project }) => {
   return (
-    <motion.div className="w-[280px] sm:w-[350px] md:w-[450px] lg:w-[500px] flex flex-col gap-5 relative rounded-lg sm:p-7 py-5 px-5 shadow-2xl shadow-black-200 bg-[#32303a] transition-all duration-200 select-none">
+    <motion.div className="glass-card w-[280px] sm:w-[350px] md:w-[450px] lg:w-[500px] flex flex-col gap-5 relative rounded-2xl sm:p-7 py-5 px-5 transition-all duration-200 select-none">
       <div
         className="absolute -top-12 md:-top-24 left-1/2 transform -translate-x-1/2 w-[230px] sm:w-[290px] md:w-[370px] lg:w-[420px] rounded-xl overflow-hidden shadow-xl z-20"
         style={project.logoStyle}
@@ -18,13 +18,13 @@ const ProjectCard = ({ project }) => {
 
       {/* Project Details */}
       <div className="flex flex-col gap-5 text-white-600 my-2 pt-20 sm:pt-24 md:pt-28 lg:pt-32">
-        <h2 className="text-md md:text-xl font-semibold mb-2 text-white font-generalsans">
+        <h2 className="text-md md:text-xl font-semibold mb-2 theme-primary font-generalsans">
           {project.title}
         </h2>
-        <p className="text-[#afb0b6] text-xs md:text-base font-generalsans">
+        <p className="theme-secondary text-xs md:text-base font-generalsans">
           {project.desc}
         </p>
-        <p className="text-[#afb0b6] text-xs md:text-base font-generalsans">
+        <p className="theme-secondary text-xs md:text-base font-generalsans">
           {project.subdesc}
         </p>
       </div>
@@ -46,7 +46,7 @@ const ProjectCard = ({ project }) => {
           {/* GitHub Link */}
           {project.source && (
             <motion.a
-              className="flex items-center gap-2 cursor-pointer text-white"
+              className="flex items-center gap-2 cursor-pointer theme-primary"
               href={project.source}
               target="_blank"
               rel="noreferrer"
@@ -62,7 +62,7 @@ const ProjectCard = ({ project }) => {
           {project.href && (
             <div className="flex items-center gap-6">
               <motion.a
-                className="flex items-center gap-2 cursor-pointer text-white"
+                className="flex items-center gap-2 cursor-pointer theme-primary"
                 href={project.href}
                 target="_blank"
                 rel="noreferrer"

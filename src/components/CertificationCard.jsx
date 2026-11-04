@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const CertificationCard = ({ certification }) => {
   return (
     <motion.div
-      className="w-[200px] sm:w-[240px] md:w-[260px] flex flex-col gap-4 relative rounded-xl p-4 shadow-lg shadow-black-200 bg-[#32303a] transition-all duration-300 select-none hover:bg-[#3a3842] hover:shadow-xl group"
+      className="glass-card w-[200px] sm:w-[240px] md:w-[260px] flex flex-col gap-4 relative rounded-2xl p-4 transition-all duration-300 select-none hover:shadow-xl group"
       whileHover={{ y: -5 }}
     >
       <div className="w-full h-[120px] rounded-lg overflow-hidden bg-white/5 flex items-center justify-center p-2 group-hover:bg-white/10 transition-colors">
@@ -17,14 +17,14 @@ const CertificationCard = ({ certification }) => {
       </div>
 
       <div className="flex flex-col gap-1.5 mt-1">
-        <h2 className="text-sm md:text-base font-bold text-white font-generalsans leading-tight line-clamp-2">
+        <h2 className="text-sm md:text-base font-bold theme-primary font-generalsans leading-tight line-clamp-2">
           {certification.title}
         </h2>
         <div className="flex flex-col gap-0.5">
-          <p className="text-[#afb0b6] text-xs font-generalsans font-medium">
+          <p className="theme-secondary text-xs font-generalsans font-medium">
             {certification.issuer}
           </p>
-          <p className="text-[#8e8f93] text-[10px] font-generalsans">
+          <p className="theme-secondary text-[10px] font-generalsans opacity-80">
             Issued: {certification.date}
           </p>
         </div>
@@ -32,7 +32,7 @@ const CertificationCard = ({ certification }) => {
 
       <div className="flex justify-end items-center w-full mt-auto pt-2">
         <motion.a
-          className="flex items-center gap-1.5 cursor-pointer text-[#c4c5c9] hover:text-white transition-colors group/link"
+          className="flex items-center gap-1.5 cursor-pointer theme-secondary hover:text-[#ff9720] transition-colors group/link"
           href={certification.link}
           target="_blank"
           rel="noreferrer"

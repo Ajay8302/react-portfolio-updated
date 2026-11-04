@@ -1,8 +1,9 @@
 import { LinearGradient } from "react-text-gradients";
 import SkillsSphere from "../components/SkillsSphere";
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 
-const Skills = () => {
+const Skills = ({ theme }) => {
   return (
     <>
       <section className="w-full flex justify-center px-4 py-10" id="skills">
@@ -21,13 +22,17 @@ const Skills = () => {
             </motion.h2>
           </div>
           <div className="relative w-full flex items-center justify-center">
-            <div className="absolute w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full bg-[#fc0865]/20 blur-3xl" />
-            <SkillsSphere />
+            <div className="skills-glow absolute w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full bg-[#fc0865]/20 blur-3xl" />
+            <SkillsSphere theme={theme} />
           </div>
         </div>
       </section>
     </>
   );
+};
+
+Skills.propTypes = {
+  theme: PropTypes.oneOf(["dark", "light"]).isRequired,
 };
 
 export default Skills;
