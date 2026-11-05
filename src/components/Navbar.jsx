@@ -34,18 +34,8 @@ const Navbar = ({ theme, onToggleTheme }) => {
   const [activeLink, setActiveLink] = useState(() => window.location.hash.slice(1) || "home");
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-
-      //Close mobile menu on scroll.
-      if (isOpen) {
-        setIsOpen(false);
-      }
-
+    const updateNavigation = () => {
+      setIsScrolled(window.scrollY > 50);
       const marker = window.scrollY + window.innerHeight * 0.35;
       const visibleSection = navLinks.reduce((active, { href }) => {
         const section = document.getElementById(href.slice(1));
@@ -54,13 +44,21 @@ const Navbar = ({ theme, onToggleTheme }) => {
       setActiveLink(visibleSection);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
-    handleScroll();
+    window.addEventListener("scroll", updateNavigation, { passive: true });
+    window.addEventListener("resize", updateNavigation);
+    updateNavigation();
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("scroll", updateNavigation);
+      window.removeEventListener("resize", updateNavigation);
     };
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    const closeMenuOnScroll = () => setIsOpen(false);
+    window.addEventListener("scroll", closeMenuOnScroll, { passive: true });
+    return () => window.removeEventListener("scroll", closeMenuOnScroll);
   }, [isOpen]);
 
   const toggleMenu = () => {
@@ -114,7 +112,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
             isOpen ? "max-h-screen" : "max-h-0"
           }`}
         >
-          <nav className="p-5">
+          <nav className="p-5" onClick={() => setIsOpen(false)}>
             <NavItems activeLink={activeLink} />
           </nav>
         </div>

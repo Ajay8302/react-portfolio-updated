@@ -91,7 +91,7 @@ const Contact = () => {
       setStatus({
         type: "error",
         text: needsReconnect
-          ? "Email delivery is temporarily unavailable. The site owner needs to reconnect the Gmail account in EmailJS."
+          ? "Email delivery is temporarily unavailable. Reconnect Gmail on the EmailJS service used by this deployment, and make sure Vercel's VITE_EMAILJS_SERVICE_ID points to that same service."
           : "Something went wrong while sending your message. Please try again later.",
       });
     } finally {
