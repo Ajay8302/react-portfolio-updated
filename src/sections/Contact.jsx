@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { LinearGradient } from "react-text-gradients";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
+import SectionHeader from "../components/SectionHeader";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -108,19 +108,11 @@ const Contact = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <div className="w-full text-left">
-          <motion.h2
-            className="mb-10 xl:text-5xl md:text-4xl sm:text-3xl text-2xl font-black !leading-normal"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <LinearGradient gradient={["to left", "#ff9720 ,#fc0865"]}>
-              Get In Touch
-            </LinearGradient>
-          </motion.h2>
-        </div>
+        <SectionHeader
+          eyebrow="Start a conversation"
+          title="Get In Touch"
+          description="Have a product, platform, or engineering problem to discuss? Send a message."
+        />
 
         <div className="glass-panel flex w-full max-w-lg sm:p-8 p-6 rounded-2xl">
           <form

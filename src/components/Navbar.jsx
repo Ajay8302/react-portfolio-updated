@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaAlignRight, FaMoon, FaSun, FaTimes } from "react-icons/fa";
 import { navLinks } from "../constants/data";
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 
 const NavItems = ({ activeLink }) => {
   return (
@@ -122,3 +123,12 @@ const Navbar = ({ theme, onToggleTheme }) => {
 };
 
 export default Navbar;
+
+NavItems.propTypes = {
+  activeLink: PropTypes.string.isRequired,
+};
+
+Navbar.propTypes = {
+  theme: PropTypes.oneOf(["dark", "light"]).isRequired,
+  onToggleTheme: PropTypes.func.isRequired,
+};

@@ -1,14 +1,17 @@
-import { LinearGradient } from "react-text-gradients";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { workExperiences } from "../constants/data";
-import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { useState } from "react";
+import SectionHeader from "../components/SectionHeader";
+import SectionDivider from "../components/SectionDivider";
 
 const ExperienceCard = ({ experience }) => {
+  const [expandedProject, setExpandedProject] = useState(null);
+
   return (
     <VerticalTimelineElement
       contentStyle={{ background: "var(--glass-fill)", color: "var(--text-primary)" }}
@@ -21,7 +24,9 @@ const ExperienceCard = ({ experience }) => {
           <img
             src={experience.icon}
             alt={experience.company}
-            className="w-full h-full object-contain rounded-full p-0.5"
+            className={`w-full h-full object-contain rounded-full p-0.5 ${
+              experience.company === "Meritech" ? "meritech-logo-badge p-1.5" : ""
+            }`}
           />
         </div>
       }
@@ -34,7 +39,14 @@ const ExperienceCard = ({ experience }) => {
         <p className="theme-secondary text-base font-mono" style={{ margin: 0 }}>
           {experience.company}
         </p>
+        <p className="theme-secondary text-xs mt-1" style={{ margin: 0 }}>
+          {experience.location}
+        </p>
       </div>
+
+      <p className="experience-summary theme-secondary text-sm leading-relaxed mt-4">
+        {experience.summary}
+      </p>
 
       {/* Technologies */}
       <div className="mt-4 flex flex-wrap gap-2">
@@ -52,16 +64,44 @@ const ExperienceCard = ({ experience }) => {
       {experience.projects && experience.projects.length > 0 && (
         <div className="mt-5">
           <h4 className="text-sm theme-primary font-semibold mb-2">Projects:</h4>
-          <ul className="list-disc ml-5 space-y-1">
+          <div className="space-y-3">
             {experience.projects.map((project, i) => (
-              <li
+              <div
                 key={`project-${i}`}
-                className="theme-secondary text-xs md:text-sm font-medium"
+                className="experience-project rounded-xl"
               >
-                {project.name}
-              </li>
+                <button
+                  type="button"
+                  className="experience-project-trigger w-full flex items-center justify-between gap-3 text-left"
+                  onClick={() => setExpandedProject(expandedProject === i ? null : i)}
+                  aria-expanded={expandedProject === i}
+                  aria-controls={`project-${experience.id}-${i}`}
+                >
+                  <span className="theme-primary text-sm font-semibold">{project.name}</span>
+                  <span className="experience-project-toggle" aria-hidden="true">
+                    {expandedProject === i ? "−" : "+"}
+                  </span>
+                </button>
+
+                {expandedProject === i && (
+                  <div id={`project-${experience.id}-${i}`} className="experience-project-content">
+                    <p className="theme-secondary text-sm leading-relaxed">{project.context}</p>
+                    <h5 className="theme-primary text-xs font-semibold uppercase tracking-wide mt-4 mb-2">Selected contributions</h5>
+                    <ul className="experience-contributions theme-secondary text-xs md:text-sm space-y-2">
+                      {project.contributions.map((contribution) => (
+                        <li key={contribution}>{contribution}</li>
+                      ))}
+                    </ul>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {project.technologies.map((technology) => (
+                        <span key={technology} className="experience-project-tech">{technology}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
     </VerticalTimelineElement>
@@ -76,20 +116,11 @@ const Experience = () => {
         id="experience"
       >
         <div className="flex flex-col w-full max-w-7xl items-center justify-start">
-          {/* Title */}
-          <div className="w-full">
-            <motion.h2
-              className="mb-10 xl:text-5xl md:text-4xl sm:text-3xl text-2xl font-black !leading-normal"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <LinearGradient gradient={["to left", "#ff9720 ,#fc0865"]}>
-                Work Experience
-              </LinearGradient>
-            </motion.h2>
-          </div>
+          <SectionHeader
+            eyebrow="Career timeline"
+            title="Work Experience"
+            description="Selected roles, products, and engineering contributions."
+          />
 
           {/* Timeline */}
           <VerticalTimeline lineColor={"#fff"}>
@@ -100,6 +131,7 @@ const Experience = () => {
               ></ExperienceCard>
             ))}
           </VerticalTimeline>
+          <SectionDivider />
         </div>
       </section>
     </>
@@ -110,17 +142,21 @@ export default Experience;
 
 ExperienceCard.propTypes = {
   experience: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     company: PropTypes.string.isRequired,
     position: PropTypes.string.isRequired,
     duration: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    summary: PropTypes.string.isRequired,
 
     technologies: PropTypes.arrayOf(PropTypes.string),
     projects: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        link: PropTypes.string,
+        context: PropTypes.string.isRequired,
+        contributions: PropTypes.arrayOf(PropTypes.string).isRequired,
+        technologies: PropTypes.arrayOf(PropTypes.string).isRequired,
       })
     ),
   }).isRequired,

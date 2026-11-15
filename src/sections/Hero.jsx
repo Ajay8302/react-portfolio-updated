@@ -10,8 +10,18 @@ import { socialLinks } from "../constants/data";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+const titles = [
+  "Full-Stack Software Engineer",
+  "Backend & Distributed Systems Engineer",
+  "R&D Software Development Engineer",
+  "AI & LLM Application Developer",
+];
+
 const Hero = () => {
   const [waveTrigger, setWaveTrigger] = useState(false);
+  const [titleIndex, setTitleIndex] = useState(0);
+  const [typedTitle, setTypedTitle] = useState("");
+  const [deletingTitle, setDeletingTitle] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,6 +32,28 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const title = titles[titleIndex];
+    const isComplete = typedTitle === title;
+    const isEmpty = typedTitle.length === 0;
+    const delay = isComplete && !deletingTitle ? 3000 : deletingTitle ? 45 : 85;
+
+    const timeout = setTimeout(() => {
+      if (isComplete && !deletingTitle) {
+        setDeletingTitle(true);
+      } else if (isEmpty && deletingTitle) {
+        setDeletingTitle(false);
+        setTitleIndex((current) => (current + 1) % titles.length);
+      } else if (deletingTitle) {
+        setTypedTitle((current) => current.slice(0, -1));
+      } else {
+        setTypedTitle(title.slice(0, typedTitle.length + 1));
+      }
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [deletingTitle, titleIndex, typedTitle]);
+
   return (
     <>
       <section
@@ -29,26 +61,24 @@ const Hero = () => {
         id="home"
       >
         <div className="max-w-7xl mx-auto flex flex-col c-space gap-7 items-center">
-          <h1 className="md:text-5xl sm:text-4xl text-2xl font-medium theme-primary text-center">
-            Hi, I am{" "}
-            <LinearGradient gradient={["to left", "#ff9720 ,#fc0865"]}>
-              Ajay Kumar
-            </LinearGradient>
-          </h1>
-          <h2
-            className="typewriter-title text-center theme-primary xl:text-6xl md:text-5xl sm:text-4xl text-3xl font-black !leading-normal relative w-[max-content]
-before:absolute before:inset-0 before:animate-typewriter
-after:absolute after:inset-0 after:w-[0.125em] after:animate-caret after:bg-[#ff9720]"
-          >
-            Software Developer
+          <div className="flex flex-col items-center gap-2">
+            <p className="theme-secondary text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Hi, I&apos;m</p>
+            <h1 className="text-center xl:text-7xl lg:text-6xl md:text-5xl sm:text-4xl text-3xl font-black !leading-none">
+              <LinearGradient gradient={["to left", "#ff9720 ,#fc0865"]}>
+                Ajay Kumar
+              </LinearGradient>
+            </h1>
+          </div>
+          <h2 className="typewriter-title text-center theme-primary xl:text-5xl lg:text-5xl md:text-4xl sm:text-3xl text-2xl font-bold !leading-tight min-h-[2.4em] flex items-center justify-center w-full max-w-6xl">
+            <span>{typedTitle}</span>
+            <span className="typewriter-caret" aria-hidden="true" />
           </h2>
 
           <p className="max-w-4xl text-center justify-center theme-secondary xl:text-xl md:text-lg sm:text-sm text-md">
-            I&apos;m a passionate software developer with expertise in web, product and Generative
-            AI integration development using JavaScript, TypeScript, C#, and Python, LangChain, and LLMs.
-            I build interactive experiences and web applications, leveraging both front-end
-             and back-end technologies. With a strong focus on clean code, collaboration, and continuous
-            learning, I strive to create innovative solutions that enhance user experiences.
+            I build and improve enterprise applications across React, TypeScript, C#/.NET, Python,
+            APIs, containerized services, and data-reporting workflows. My work spans telecom platforms,
+            operational systems, and AI-enabled product development—with an emphasis on reliable delivery,
+            clear ownership, and pragmatic problem-solving.
           </p>
         </div>
         <motion.div
