@@ -147,6 +147,17 @@ h1, h2, h3, h4, h5, h6 {
 .contact-input:focus-visible { outline: 2px solid #ff9720; outline-offset: 3px; }
 
 .typewriter-title:before { background: var(--page-bg); }
+.typewriter-caret {
+  display: inline-block;
+  flex: 0 0 0.08em;
+  height: 0.9em;
+  margin-left: 0.08em;
+  background: #ff9720;
+  animation: typewriter-caret-blink 850ms steps(2, start) infinite;
+}
+@keyframes typewriter-caret-blink {
+  to { visibility: hidden; }
+}
 
 .contact-input {
   color: var(--text-primary);
@@ -159,6 +170,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .vertical-timeline-element-content {
   border: 1px solid var(--glass-border);
+  border-radius: 0.75rem !important;
   box-shadow: 0 18px 55px rgba(20, 16, 32, 0.16), inset 0 1px 0 var(--glass-highlight) !important;
   -webkit-backdrop-filter: blur(18px) saturate(145%);
   backdrop-filter: blur(18px) saturate(145%);
@@ -166,6 +178,135 @@ h1, h2, h3, h4, h5, h6 {
 .vertical-timeline-element-content p { color: var(--text-secondary); }
 .vertical-timeline::before { background: var(--timeline-line, var(--glass-border)); }
 .vertical-timeline-element-date { color: var(--text-secondary) !important; }
+
+.meritech-logo-badge {
+  background: #e8eef0;
+  border: 2px solid #adc2c9;
+  box-shadow: 0 0 0 3px rgba(68, 159, 155, 0.18), 0 4px 10px rgba(5, 18, 36, 0.32);
+}
+
+.portfolio-shell[data-theme="light"] .meritech-logo-badge {
+  background: #f4f7f8;
+  border-color: #91aab2;
+  box-shadow: 0 0 0 3px rgba(68, 159, 155, 0.14), 0 4px 10px rgba(24, 71, 104, 0.18);
+}
+
+.experience-summary { max-width: 62ch; }
+.experience-project {
+  border: 1px solid var(--glass-border);
+  background: var(--muted-fill);
+  overflow: hidden;
+}
+.experience-project-trigger {
+  color: var(--text-primary);
+  padding: 0.8rem 0.9rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.experience-project-trigger:hover { background: rgba(255, 151, 32, 0.08); }
+.experience-project-trigger:focus-visible { outline: 2px solid #ff9720; outline-offset: -3px; }
+.experience-project-toggle {
+  color: #ff9720;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.experience-project-content { padding: 0 0.9rem 0.9rem; }
+.experience-contributions { padding-left: 1.1rem; list-style: disc; }
+.experience-project-tech,
+.skills-group-chip {
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+  background: rgba(126, 63, 242, 0.13);
+  border-radius: 9999px;
+  padding: 0.27rem 0.55rem;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+.skills-groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.skills-group { min-height: 9rem; }
+.skills-architecture {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  background: linear-gradient(135deg, rgba(126, 63, 242, 0.11), rgba(252, 8, 101, 0.045));
+  box-shadow: inset 0 1px 0 var(--glass-highlight), 0 22px 56px rgba(20, 16, 32, 0.14);
+}
+.skills-architecture::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  right: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 151, 32, 0.8), transparent);
+}
+.skills-architecture-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 1rem;
+}
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 1.75rem;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid rgba(255, 151, 32, 0.34);
+  border-radius: 9999px;
+  color: #ff9720;
+  background: rgba(255, 151, 32, 0.08);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.section-header { margin-bottom: 2.5rem; }
+.section-header-title { margin: 0.7rem 0 0; }
+.section-header-description { max-width: 42rem; margin: 0.65rem 0 0; }
+.section-handoff {
+  display: grid;
+  grid-template-columns: minmax(2rem, 1fr) auto minmax(2rem, 1fr);
+  align-items: center;
+  gap: 1rem;
+  width: min(42rem, 100%);
+  margin: 3.5rem auto 0;
+}
+.section-handoff span { height: 1px; background: var(--glass-border); }
+.section-handoff i {
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 2px solid #ff9720;
+  border-radius: 9999px;
+  background: var(--page-bg);
+  box-shadow: 0 0 0 4px rgba(255, 151, 32, 0.1);
+}
+
+.portfolio-shell[data-theme="light"] .skills-architecture {
+  background: linear-gradient(135deg, rgba(126, 63, 242, 0.075), rgba(252, 8, 101, 0.025));
+}
+.portfolio-shell[data-theme="light"] .section-kicker {
+  color: #ad5300;
+  border-color: #dd9a55;
+  background: #fff3e7;
+}
+.portfolio-shell[data-theme="light"] .glass-panel,
+.portfolio-shell[data-theme="light"] .glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(76, 72, 90, 0.26);
+  box-shadow: 0 16px 42px rgba(42, 39, 55, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 640px) {
+  .skills-architecture-header { grid-template-columns: 1fr; gap: 0.75rem; }
+  .section-handoff { margin-top: 2.5rem; }
+}
 
 .portfolio-shell[data-theme="light"] .vertical-timeline-element-icon {
   box-shadow: 0 0 0 4px var(--page-bg), inset 0 2px 0 rgba(255, 255, 255, 0.65), 0 3px 0 4px rgba(34, 30, 43, 0.12);

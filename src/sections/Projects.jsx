@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import Carousel from "react-spring-3d-carousel";
 import { config } from "react-spring";
 import { v4 as uuidv4 } from "uuid";
-import { LinearGradient } from "react-text-gradients";
 import { myProjects } from "../constants/data";
 import ProjectCard from "../components/ProjectCard";
 import { motion } from "framer-motion";
+import SectionHeader from "../components/SectionHeader";
+import SectionDivider from "../components/SectionDivider";
 
 const Projects = () => {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -23,19 +24,11 @@ const Projects = () => {
   return (
     <section className="w-full flex justify-center mb-20 px-4" id="projects">
       <div className="flex flex-col w-full max-w-7xl items-center justify-start">
-        <div className="w-full">
-          <motion.h2
-            className="mb-10 xl:text-5xl md:text-4xl sm:text-3xl text-2xl font-black !leading-normal"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <LinearGradient gradient={["to left", "#ff9720 ,#fc0865"]}>
-              Projects
-            </LinearGradient>
-          </motion.h2>
-        </div>
+        <SectionHeader
+          eyebrow="Selected work"
+          title="Projects"
+          description="A closer look at independent products and implementation-focused work."
+        />
 
         <motion.div
           drag="x"
@@ -63,6 +56,7 @@ const Projects = () => {
             />
           )}
         </motion.div>
+        <SectionDivider />
       </div>
     </section>
   );

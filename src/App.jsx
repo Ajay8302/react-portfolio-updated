@@ -9,7 +9,6 @@ import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
 import StarCanvas from "./components/StarField";
 import Footer from "./components/Footer";
-import CursorGlow from "./components/CursorGlow";
 import { useEffect, useState } from "react";
 
 export default function App() {
@@ -41,7 +40,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-      <CursorGlow />
       <StarCanvas />
       <Analytics />
     </div>
